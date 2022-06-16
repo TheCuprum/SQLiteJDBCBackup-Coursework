@@ -1,0 +1,1 @@
+java -cp "lib/*;bin" pers.main.Main > output.txt

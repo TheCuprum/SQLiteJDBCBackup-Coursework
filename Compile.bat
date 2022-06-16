@@ -1,0 +1,1 @@
+javac -cp "lib/*" -d bin --source-path=src src/pers/main/Main.java
