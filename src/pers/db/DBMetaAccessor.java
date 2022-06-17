@@ -39,6 +39,17 @@ public class DBMetaAccessor extends BaseDatabaseAccessor {
         };
     }
 
+    public Function<DatabaseMetaData, ResultSet> listIndexes(String tableName) {
+        return meta -> {
+            try {
+                return meta.getIndexInfo(null, null, tableName, false, false);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            return null;
+        };
+    }
+
     public Function<DatabaseMetaData, ResultSet> listAllTables() {
         return meta -> {
             try {
