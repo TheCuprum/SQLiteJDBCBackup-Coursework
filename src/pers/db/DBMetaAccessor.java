@@ -1,7 +1,6 @@
 package pers.db;
 
 import java.sql.DatabaseMetaData;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -15,7 +14,7 @@ import pers.main.Util;
 public class DBMetaAccessor extends BaseDatabaseAccessor {
 
     public DBMetaAccessor(String _dbName) {
-        super(_dbName);
+        super(_dbName, true);
     }
 
     public void showMeta(Function<DatabaseMetaData, ResultSet> f) {
@@ -150,5 +149,19 @@ public class DBMetaAccessor extends BaseDatabaseAccessor {
     //             e.printStackTrace();
     //         }
     //     }
+    // }
+
+    /* code for testing */
+    // public static void main(String[] args) {
+    //      // ExtendedDBAccessor accessor = new ExtendedDBAccessor("data/LSH.db");
+    //      DBMetaAccessor accessor = new DBMetaAccessor("./data/Northwind.db");
+    //      accessor.getTableNames();
+    //      // accessor.showMeta(accessor.listAllTables());
+    //      // accessor.showMeta(accessor.listIndexes("Album"));
+    //      // accessor.showMeta(accessor.listPrimaryKeys("department"));
+    //      accessor.showMeta(accessor.listColumns("Categories"));
+    //      // accessor.showMeta(accessor.listRef("department", "staff"));
+ 
+    //      // accessor.showMeta(accessor.listImportedKeys("work_on"));    
     // }
 }

@@ -1,22 +1,26 @@
-package pers.db;
+package pers.db.info;
+
+// import java.sql.Types;
 
 public class ColumnInfo {
     String columnName;
+    int dataType;
     String columnType;
-    boolean nullable;
-    boolean autoIncrement;
+    int nullable;
     
+    // boolean autoIncrement;
     // boolean isPrimaryKey;
     // boolean unique;
     // Object defaultVal;
     // ?? checkPredicate;
 
 
-    public ColumnInfo(String name, String type, boolean nullable, boolean autoIncrement){
+    public ColumnInfo(String name, int dataType, String type, int nullable/*, boolean autoIncrement*/){
         this.columnName = name;
+        this.dataType = dataType;
         this.columnType = type;
         this.nullable = nullable;
-        this.autoIncrement = autoIncrement;
+        // this.autoIncrement = autoIncrement;
     }
 
     public String getColumnName(){
@@ -27,22 +31,30 @@ public class ColumnInfo {
         return this.columnType;
     }
 
-    public boolean isNullable(){
-        return this.nullable;
+    public int getDataType(){
+        return this.dataType;
     }
 
-    public boolean isAutoIncrement(){
-        return this.autoIncrement;
+    public boolean isNullable(){
+        return this.nullable == 1;
     }
+
+    public boolean isNonNullable(){
+        return this.nullable == 0;
+    }
+
+    // public boolean isAutoIncrement(){
+    //     return this.autoIncrement;
+    // }
 
     @Override
     public String toString(){
         StringBuilder builder = new StringBuilder(this.columnName);
         builder.append(" ").append(columnType);
-        if (!this.nullable)
+        if (this.isNonNullable())
             builder.append(" NOT NULL");
-        if (this.autoIncrement)
-            builder.append(" AUTOMINCRRMENT");
+        // if (this.autoIncrement)
+        //     builder.append(" AUTOMINCRRMENT");
         return builder.toString();
     }
 

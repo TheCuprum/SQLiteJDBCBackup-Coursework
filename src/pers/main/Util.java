@@ -4,7 +4,7 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 
-public class Util{
+public class Util {
     /**
      * Outputs a stacktrace for debugging and exits
      * <p>
@@ -21,9 +21,10 @@ public class Util{
 
     /**
      * Prints the content of a list
+     * 
      * @param objList a list of objects
      */
-    public static void printList(Object[] objList, boolean newline){
+    public static void printList(Object[] objList, boolean newline) {
         for (Object object : objList) {
             System.out.print(object.toString() + ", ");
         }
@@ -31,15 +32,15 @@ public class Util{
             System.out.println();
     }
 
-    public static void printResultSet(ResultSet rs, int padLength){
+    public static void printResultSet(ResultSet rs, int padLength) {
         try {
             ResultSetMetaData rsMeta = rs.getMetaData();
-            for (int index = 1; index <= rsMeta.getColumnCount(); index++){
+            for (int index = 1; index <= rsMeta.getColumnCount(); index++) {
                 System.out.print(Util.padString(rsMeta.getColumnName(index), padLength) + '|');
             }
             System.out.println();
-            while(rs.next()){
-                for (int index = 1; index <= rsMeta.getColumnCount(); index++){
+            while (rs.next()) {
+                for (int index = 1; index <= rsMeta.getColumnCount(); index++) {
                     System.out.print(Util.padString(rs.getString(index), padLength) + '|');
                 }
                 System.out.println();
@@ -49,13 +50,13 @@ public class Util{
         }
     }
 
-    public static String padString(String str, int length){
+    public static String padString(String str, int length) {
         byte[] org_bytes = (str != null) ? str.getBytes() : "null".getBytes();
         byte[] new_bytes = new byte[length];
         int bound = (str != null) ? str.length() : 4;
         boolean isCutted = false;
 
-        if (bound > length){
+        if (bound > length) {
             bound = length;
             if (length > 2)
                 isCutted = true;
@@ -66,11 +67,37 @@ public class Util{
         for (int i = bound; i < length; i++)
             new_bytes[i] = ' ';
 
-        if (isCutted){
+        if (isCutted) {
             new_bytes[length - 1] = '.';
             new_bytes[length - 2] = '.';
         }
 
         return new String(new_bytes);
+    }
+
+    public static String hex2String(byte[] bytes) {
+        StringBuilder builder = new StringBuilder("0x");
+        for (byte hex : bytes) {
+            byte higher = (byte) (hex >> 4 & 0x0f);
+            byte lower = (byte) (hex & 0x0f);
+            char h = (char) ((higher > 9) ? (higher + 'A' - 10) : higher + '0');
+            char l = (char) ((lower > 9) ? (lower + 'A' - 10) : lower + '0');
+            builder.append(h).append(l);
+        }
+        return builder.toString();
+    }
+
+    public static String convertToString(Object o) {
+        if (o == null)
+            return "NULL";
+        else if (o instanceof Long || o instanceof Integer)
+            return o.toString();
+        else if (o instanceof Double)
+            return o.toString();
+        else if (o instanceof byte[])
+            return hex2String((byte[]) o);
+        else if (o instanceof String)
+            return "\"".concat((String) o).concat("\"");
+        return null;
     }
 }

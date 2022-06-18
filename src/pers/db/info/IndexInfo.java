@@ -1,8 +1,10 @@
-package pers.db;
+package pers.db.info;
 
 import java.util.ArrayList;
 
-public class IndexInfo implements SQLStatementInterface{
+import pers.db.SQLStatementInterface;
+
+public class IndexInfo implements SQLStatementInterface {
     String tableName;
     String indexName;
     boolean nonUnique;
@@ -21,36 +23,39 @@ public class IndexInfo implements SQLStatementInterface{
             this.columnList.add(columns[i]);
     }
 
-    public void addColumn(String columnName, boolean checkExist){
+    public void addColumn(String columnName, boolean checkExist) {
         if (checkExist && this.columnList.contains(columnName))
             return;
         this.columnList.add(columnName);
     }
 
-    public String getTableName(){
+    public String getTableName() {
         return this.tableName;
     }
 
-    public String getIndexName(){
+    public String getIndexName() {
         return indexName;
     }
 
-    public boolean isUnique(){
+    public boolean isUnique() {
         return !this.nonUnique;
     }
 
-    public String[] getColumnList(){
-        return (String[])this.columnList.toArray();
+    public String[] getColumnList() {
+        String[] strArr = new String[this.columnList.size()];
+        return this.columnList.toArray(strArr);
     }
 
     @Override
-    public String toSQLStatement(){
-        StringBuilder builder = new StringBuilder("CREATE INDEX ");
-        if (!this.nonUnique) builder.append("UNIDQUE ");
+    public String toSQLCreationStatement() {
+        StringBuilder builder = new StringBuilder("CREATE ");
+        if (!this.nonUnique)
+            builder.append("UNIQUE ");
+        builder.append("INDEX ");
         builder.append(this.indexName)
-               .append("\n").append("ON ")
-               .append(this.tableName);
-        if (this.columnList.size() > 0){
+                .append("\n").append("ON ")
+                .append(this.tableName);
+        if (this.columnList.size() > 0) {
             builder.append("(").append(this.columnList.get(0));
             for (int i = 1; i < this.columnList.size(); i++)
                 builder.append(", ").append(this.columnList.get(i));
@@ -61,8 +66,13 @@ public class IndexInfo implements SQLStatementInterface{
     }
 
     @Override
+    public String toSQLDeletionStatement() {
+        return null;
+    }
+
+    @Override
     public int hashCode() {
-        String hashString = this.tableName.concat("@").concat(this.indexName);
+        String hashString = this.indexName.concat("@").concat(this.tableName);
         return hashString.hashCode();
     }
 

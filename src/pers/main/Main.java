@@ -1,20 +1,38 @@
 package pers.main;
 
-import pers.db.DBReader;
-import pers.db.DBMetaAccessor;
+
+import java.io.FileNotFoundException;
+import java.io.UnsupportedEncodingException;
+
+import pers.db.DBBackup;
 
 public class Main{
-    public static void main(String[] argv){
-        // ExtendedDBAccessor accessor = new ExtendedDBAccessor("data/LSH.db");
-        DBMetaAccessor accessor = new DBMetaAccessor("data/Chinook.db");
-        accessor.getTableNames();
-        // accessor.showMeta(accessor.listAllTables());
-        accessor.showMeta(accessor.listIndexes("Album"));
-        // accessor.showMeta(accessor.listPrimaryKeys("department"));
-        // accessor.showMeta(accessor.listColumns("staff"));
-        // accessor.showMeta(accessor.listRef("department", "staff"));
+    public static String hadleArguments(String[] argv){
+        if (argv.length == 1)
+            return argv[0];
+        else if (argv.length > 1)
+            System.err.println("Too many arguments.");
+        else
+            System.err.println("Not enough arguments.");
+        System.out.println("Usage: java <CLASS_NAME> <DATABASE_NAME>");
+        System.exit(0);
+        return null;
+    }
 
-        // accessor.showMeta(accessor.listImportedKeys("work_on"));
+    public static void main(String[] argv){
+        String dbName = hadleArguments(argv);
+
+        DBBackup backup = null;
+        try {
+            backup = new DBBackup(dbName);
+            backup.runBackup();
+        } catch (FileNotFoundException | UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }finally{
+            if (backup != null)
+                backup.close();
+        }
+        
+       
     }
 }
-//query.exec("PRAGMA foreign_keys = ON"); //外键

@@ -51,7 +51,7 @@ public class BaseDatabaseAccessor {
      * @param _dbName String holding the name of the database,
      *                for example, C:/directory/subdir/mydb.db
      */
-    public BaseDatabaseAccessor(String _dbName) {
+    public BaseDatabaseAccessor(String _dbName, boolean checkExist) {
         dbName = _dbName;
 
         if (debug)
@@ -60,7 +60,7 @@ public class BaseDatabaseAccessor {
                             + dbName
                             + "]");
 
-        open();
+        open(checkExist);
     }
 
     /**
@@ -69,10 +69,10 @@ public class BaseDatabaseAccessor {
      * Confirms database file exists and if so,
      * loads JDBC driver and establishes JDBC connection to database
      */
-    private void open() {
+    private void open(boolean checkExist) {
         File dbf = new File(dbName);
 
-        if (dbf.exists() == false) {
+        if (checkExist && dbf.exists() == false) {
             System.out.println(
                     "SQLite database file ["
                             + dbName
@@ -97,7 +97,7 @@ public class BaseDatabaseAccessor {
      * Commits any remaining updates to database and
      * closes connection
      */
-    public final void close() {
+    public void close() {
         try {
             con.commit(); // Commit any updates
             con.close();

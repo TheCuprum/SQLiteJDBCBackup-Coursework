@@ -6,4 +6,6 @@ public class Config {
     public static String BACKUP_SUFFIX = "_copy";
     public static String DB_EXTENSION = ".db";
     public static String SQL_EXTENSION = ".sql";
+
+    public static String IO_DECODE_CHARSET = "UTF-8";
 }

@@ -1,4 +1,4 @@
-package pers.db;
+package pers.db.info;
 
 public class ForeignKeyPair {
     String localColumn;

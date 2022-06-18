@@ -1,5 +1,6 @@
 package pers.db;
 
 public interface SQLStatementInterface {
-    public String toSQLStatement();
+    public String toSQLCreationStatement();
+    public String toSQLDeletionStatement();
 }
