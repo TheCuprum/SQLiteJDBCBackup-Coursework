@@ -96,8 +96,10 @@ public class Util {
             return o.toString();
         else if (o instanceof byte[])
             return hex2String((byte[]) o);
-        else if (o instanceof String)
-            return "\"".concat((String) o).concat("\"");
+        else if (o instanceof String) {
+            String str = ((String) o).replace("\"", "\"\"").replace("\'", "\'\'");
+            return "\"".concat(str).concat("\"");
+        }
         return null;
     }
 }
