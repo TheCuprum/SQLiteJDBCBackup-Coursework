@@ -1,7 +1,7 @@
 package pers.main;
 
 public class Config {
-    public static boolean DEBUG = true;
+    public static boolean DEBUG = false;
     
     public static String BACKUP_SUFFIX = "_copy";
     public static String DB_EXTENSION = ".db";

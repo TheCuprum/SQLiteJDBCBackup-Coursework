@@ -1,5 +1,10 @@
-doc/
+bin/
 backup/
+doc/
 data/
 lib/
+text/
 .vscode/
+
+JDBC_Coursework.jar
+*.class

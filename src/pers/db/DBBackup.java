@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 
 import pers.db.info.DatabaseInfo;
 import pers.db.info.IndexInfo;
+import pers.db.info.SQLDataContainer;
 import pers.db.info.TableInfo;
 import pers.main.Config;
 
@@ -21,6 +22,12 @@ public class DBBackup {
 
     private DatabaseInfo dbInfo = null;
 
+    /**
+     * Class for making backup of one database.
+     * @param sourceName Source database to be backed up.
+     * @throws FileNotFoundException
+     * @throws UnsupportedEncodingException
+     */
     public DBBackup(String sourceName) throws FileNotFoundException, UnsupportedEncodingException {
         String backupName = sourceName.substring(0, sourceName.lastIndexOf("."))
                 .concat(Config.BACKUP_SUFFIX);
@@ -47,7 +54,7 @@ public class DBBackup {
             e.printStackTrace();
         }
     }
-
+    
     public void runBackup() {
         this.backupDBMeta();
         this.backupDBContent();

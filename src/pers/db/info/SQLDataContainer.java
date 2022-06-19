@@ -1,11 +1,10 @@
-package pers.db;
+package pers.db.info;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import pers.db.info.ColumnInfo;
-import pers.db.info.TableInfo;
+import pers.db.SQLStatementInterface;
 
 public class SQLDataContainer implements SQLStatementInterface {
     TableInfo tableInfo;
