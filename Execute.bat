@@ -1,1 +1,1 @@
-java -cp "lib/*;bin" pers.main.Main > output.txt
+java -cp "lib/*;bin" pers.main.Main "data/Chinook.db"

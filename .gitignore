@@ -5,6 +5,7 @@ data/
 lib/
 text/
 .vscode/
+__pycache__/
 
 JDBC_Coursework.jar
 *.class

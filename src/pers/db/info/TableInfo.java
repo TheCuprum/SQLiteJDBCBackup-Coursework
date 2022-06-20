@@ -51,7 +51,9 @@ public class TableInfo implements SQLStatementInterface {
 
     public void addForeignKey(String key, TableInfo foreignTable, String foreignColumn) {
         this.foreignKeyPairs.add(new ForeignKeyPair(key, foreignColumn, foreignTable.getTableName()));
-        if (this.importedTables.put(foreignTable, Boolean.FALSE) != null)
+        if (foreignTable.equals(this))
+            this.importedTables.put(foreignTable, Boolean.TRUE);
+        else if (this.importedTables.put(foreignTable, Boolean.FALSE) != null)
             System.err.println("Key ".concat(foreignTable.getTableName())
                     .concat(" already exists when creating TableInfo ".concat(this.tableName)));
         foreignTable.addExportedKey(foreignColumn, this, key);
