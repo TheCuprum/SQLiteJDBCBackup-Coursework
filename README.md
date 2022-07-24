@@ -23,3 +23,8 @@ Submission (to Moodle) Checklist (for the milestone you have reached)
 
 To gain marks you must submit to Moodle and demonstrate your solution as submitted to Moodle. 
 Failure to submit, to demo, or demoing code different to that submitted will result in a mark of zero
+
+## 备注
+按照作业要求走了走流程，然后得分98%。代码结构随便整了个自己喜欢的结构，看起来有点像Encoder-Decoder或者Serialization-Deserialization？
+
+代码实现仅供参考，不保证完备性。

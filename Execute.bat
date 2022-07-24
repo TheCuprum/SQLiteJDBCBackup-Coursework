@@ -1,1 +1,1 @@
-java -cp "lib/*;bin" pers.main.Main "data/Chinook.db"
+java -cp "lib/*;bin" pers.main.Main "data/University.db"
